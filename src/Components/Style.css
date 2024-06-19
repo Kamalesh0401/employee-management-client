@@ -1,0 +1,99 @@
+.error{
+    color:red;
+}
+.table-container {
+    margin: 20px;
+  }
+  
+  .employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .employee-table th,
+  .employee-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .employee-table th {
+    background-color: #f2f2f2;
+  }
+  
+  /* .employee-table tbody tr:nth-child(even) {
+    background-color: #d4cfcf;
+  } */
+  
+  .employee-table tbody tr:hover {
+    background-color: #6d6d6d;
+  }
+  
+  .update-button,
+  .delete-button {
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    margin-right: 5px;
+    font-size: 14px;
+  }
+  
+button:hover{
+
+  background-color: #73b6b6;
+  }
+
+  .update-button{
+    background-color: #066309;
+    color: #fff;
+  }
+  
+  .delete-button {
+    background-color: #f44336;
+    color: #fff;
+  }
+  
+  .progress-container {
+    width: 150px;
+    text-align: center;
+  }
+
+  progress {
+    width: 100%;
+    height: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: inherit;
+    appearance: none;
+  }
+
+  progress::before {
+    content: 'deleting ' attr(value) '%';
+    display: block;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    appearance: none;
+  }
+
+
+  
+  progress::-webkit-progress-bar {
+    background-color: #ddd;
+    border-radius: 5px;
+  }
+
+  progress::-webkit-progress-value {
+    background-color: #3498db;
+    border-radius:5px;
+  }
+
+  span {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+  }
