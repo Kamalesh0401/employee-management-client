@@ -1,5 +1,6 @@
-const publicurl = 'https://5000-kamalesh040-eployeeback-xhns2kvrwfg.ws-us115.gitpod.io';
-const testurl = 'http://localhost:5000/employees';
+const testurl = 'https://5000-kamalesh040-eployeeback-xhns2kvrwfg.ws-us115.gitpod.io/employees';
+//'http://localhost:5000/employees'
+//'https://5000-kamalesh040-eployeeback-xhns2kvrwfg.ws-us115.gitpod.io/employees';
 
 const fetchEmployees = async () => {
     try {
@@ -18,7 +19,7 @@ const fetchEmployees = async () => {
 
 const addEmployee = async (item) => {
     try {
-        const response = await fetch(`${testurl}/employees`, {
+        const response = await fetch(`${testurl}/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -36,18 +37,18 @@ const addEmployee = async (item) => {
     }
 }
 
-const updateEmployee = async (id, name, address) => {
+const updateEmployee = async (item) => {
     try {
-        const response = await fetch(`${testurl}/employees/${id}`, {
+        const response = await fetch(`${testurl}/update`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, address })
+            body: JSON.stringify(item)
         });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+        // if (!response.ok) {
+        //     throw new Error('Network response was not ok');
+        // }
         const data = await response.json();
         return data;
     } catch (error) {
@@ -58,12 +59,12 @@ const updateEmployee = async (id, name, address) => {
 
 const deleteEmployee = async (id) => {
     try {
-        const response = await fetch(`${testurl}/employees/${id}`, {
+        const response = await fetch(`${testurl}/${id}`, {
             method: 'DELETE'
         });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+        // if (!response.ok) {
+        //     throw new Error('Network response was not ok');
+        // }
         const data = await response.json();
         return data;
     } catch (error) {

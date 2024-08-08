@@ -1,27 +1,26 @@
 import { useState, useEffect } from "react";
 import './Emp-Form.css';
-import { addEmp, changeEmp } from './Emp-Action';
+import { addEmp } from './Emp-Action';
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
-import { fetchEmployees, addEmployee, updateEmployee, deleteEmployee } from './Utils';
+import { fetchEmployees, addEmployee, updateEmployee } from './Utils';
 
 
-function EmployeeForm(Empdetails, isVisible) {
+function EmployeeForm() {
 
     const dispatch = useDispatch();
-
-    useEffect(() => {
-
-        let result = fetchEmployees();
-        console.log("result", result);
-
-    }, []);
 
     const [submit, setSubmit] = useState(false);
 
     const [successMessage, setSuccessMessage] = useState('');
 
     const [errors, setErrors] = useState('');
+
+    const selectMyData = (state) => state.EmployeeReducer;
+
+    const tableData = useSelector(selectMyData);
+
+    let updatavalue = tableData.updateData;
 
     const [formData, setFormData] = useState({
         id: '',
@@ -32,23 +31,24 @@ function EmployeeForm(Empdetails, isVisible) {
         salary: ''
     });
 
+    useEffect(() => {
+
+        if (updatavalue !== '' && updatavalue !== null) {
+
+            updatavalue.forEach(element => {
+                setFormData(element)
+
+            });
+
+        }
+    }, [updatavalue]);
 
     const generateEmployeeId = () => {
 
         var number = 0;
         const initials = formData.name.slice(0, 3).toUpperCase();
-        //number = number + 1;
-
-        // const randomNumber = Math.floor(Math.random() * 100);
-
-        //   number++; return initials + 2023 ; 
-
         console.log(number);
         return initials + 2024;
-
-        // 2024;
-
-
     };
 
     const handleChange = (e) => {
@@ -61,10 +61,34 @@ function EmployeeForm(Empdetails, isVisible) {
 
     }
 
-    const selectMyData = (state) => state.EmployeeReducer;
-    const tableData = useSelector(selectMyData);
-    let updatavalue = tableData.updateData;
+    const adddetails = async () => {
 
+        let result = await addEmployee(formData);
+        if (result && result.status === 'OK') {
+            setSuccessMessage(result.data);
+            setSubmit(true);
+        }
+        else {
+            setSuccessMessage(result.data);
+            setSubmit(true);
+        }
+    }
+    const updatedetails = async () => {
+
+        let result = await updateEmployee(formData);
+        if (result && result.status === 'OK') {
+            setSuccessMessage(result.data);
+            setSubmit(true);
+            let result2 = await fetchEmployees();
+            if (result2.status === 'OK') {
+                dispatch(addEmp(result2.data));
+            }
+        }
+        else {
+            setSuccessMessage(result.data);
+            setSubmit(true);
+        }
+    }
 
     const HandleSubmit = (e) => {
         e.preventDefault();
@@ -72,18 +96,8 @@ function EmployeeForm(Empdetails, isVisible) {
         const statebool = FormValidation();
 
         if (statebool) {
-
-            console.log("the form data is ", formData);
-            setSubmit(true);
-            setSuccessMessage('Form submitted successfully!');
-            let result = addEmployee(formData);
-            console.log("result : ", result);
-
-
             if (updatavalue !== '' && updatavalue !== null) {
-
-
-                dispatch(changeEmp({ formData }));
+                updatedetails();
                 setFormData({
                     id: '',
                     name: '',
@@ -92,11 +106,9 @@ function EmployeeForm(Empdetails, isVisible) {
                     experience: '',
                     salary: ''
                 });
-
             }
             else {
-
-                dispatch(addEmp({ formData }));
+                adddetails();
                 setFormData({
                     id: '',
                     name: '',
@@ -107,37 +119,21 @@ function EmployeeForm(Empdetails, isVisible) {
                 });
             }
 
-
-
         }
 
-    }
-
-    useEffect(() => {
-        if (updatavalue !== '' && updatavalue !== null) {
-
-            updatavalue.forEach(element => {
-                setFormData(element)
-
-            });
-
-        }
-    }, [updatavalue]);
-
+    };
 
     useEffect(() => {
         if (submit) {
             const timeoutId = setTimeout(() => {
                 setSubmit(false);
                 setSuccessMessage('');
-            }, 2000);
+            }, 3000);
 
 
             return () => clearTimeout(timeoutId);
         }
     }, [submit]);
-
-    //console.log('the window variable to check : ' , window.successMessage);
 
     function FormValidation(e) {
 
@@ -186,6 +182,7 @@ function EmployeeForm(Empdetails, isVisible) {
         return valid;
 
     }
+    //style={{ pointerEvents: submit === true ? 'none' : 'auto' }}
 
 
     return (
@@ -292,23 +289,5 @@ function EmployeeForm(Empdetails, isVisible) {
     );
 
 }
-
-// export function HandleUpdate(id) {
-
-//     const dispatch = useDispatch();
-
-//     const selectMyData = (state) => state.EmployeeReducer;
-//     const  tableData = useSelector(selectMyData);
-
-//     const updateEmp = tableData.myData.filter((employee) => employee.id === id)
-
-
-
-//     console.log('The Upadte value  is : ' , id);
-//     console.log('The ADTA myData is : ' , tableData.myData);
-//     console.log('The ADTA  is : ' , tableData);
-//     console.log('The updateEmp  is : ' , updateEmp);
-//   }
-
 
 export default EmployeeForm;

@@ -25,11 +25,3 @@ export const deleteEmp =(id)=>{
     );
 
 }
-export const changeEmp =(formData)=>{
-
-    return(
-        {type : 'CHANGE_VALUE',
-         payload : formData}
-    );
-
-}
