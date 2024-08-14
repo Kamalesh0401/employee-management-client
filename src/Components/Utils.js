@@ -1,6 +1,7 @@
-const testurl = 'https://5000-kamalesh040-eployeeback-xhns2kvrwfg.ws-us115.gitpod.io/employees';
-//'http://localhost:5000/employees'
-//'https://5000-kamalesh040-eployeeback-xhns2kvrwfg.ws-us115.gitpod.io/employees';
+const testurl = 'https://employee-backend-vmmf.onrender.com/employees';
+//Render -- https://employee-backend-vmmf.onrender.com
+//Local -- 'http://localhost:5000/employees'
+//Gitpod -- 'https://5000-kamalesh040-eployeeback-xhns2kvrwfg.ws-us115.gitpod.io/employees';
 
 const fetchEmployees = async () => {
     try {
