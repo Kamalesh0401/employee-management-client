@@ -1,11 +1,13 @@
-const testurl = 'https://employee-backend-vmmf.onrender.com/employees';
-//Render -- https://employee-backend-vmmf.onrender.com
-//Local -- 'http://localhost:5000/employees'
-//Gitpod -- 'https://5000-kamalesh040-eployeeback-xhns2kvrwfg.ws-us115.gitpod.io/employees';
+const serviceurl = 'http://localhost:5000/employees';
 
 const fetchEmployees = async () => {
     try {
-        const response = await fetch(`${testurl}`);
+        const response = await fetch(`${serviceurl}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -20,7 +22,7 @@ const fetchEmployees = async () => {
 
 const addEmployee = async (item) => {
     try {
-        const response = await fetch(`${testurl}/add`, {
+        const response = await fetch(`${serviceurl}/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +42,7 @@ const addEmployee = async (item) => {
 
 const updateEmployee = async (item) => {
     try {
-        const response = await fetch(`${testurl}/update`, {
+        const response = await fetch(`${serviceurl}/update`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -60,7 +62,7 @@ const updateEmployee = async (item) => {
 
 const deleteEmployee = async (id) => {
     try {
-        const response = await fetch(`${testurl}/${id}`, {
+        const response = await fetch(`${serviceurl}/${id}`, {
             method: 'DELETE'
         });
         // if (!response.ok) {

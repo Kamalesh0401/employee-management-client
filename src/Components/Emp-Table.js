@@ -61,7 +61,7 @@ function EmployeeTable(FormData) {
                 setShowProgress(false);
                 setDeletePercent(0);
             }
-        }, 80);
+        }, 50);
 
         return () => clearInterval(timer);
 
