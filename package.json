@@ -2,7 +2,7 @@
   "name": "employee-details",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Kamalesh0401.github.io/EmployeeApp/",
+  "homepage": "https://Kamalesh0401.github.io/employee-management-client/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
     "@testing-library/jest-dom": "^5.17.0",
